@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CENO is a long-context genomic foundation model for evolutionary sequence interpretation, variant-effect prediction, and regulatory sequence design."
+    />
+    <title>CENO | Long-context genomic foundation model</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="CENO home">
+        <span>C</span>
+        <strong>CENO</strong>
+      </a>
+      <nav aria-label="Project sections">
+        <a href="#overview">Overview</a>
+        <a href="#method">Method</a>
+        <a href="#long-context">Long context</a>
+        <a href="#variant">Variants</a>
+        <a href="#design">Design</a>
+        <a href="#paper">Paper</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <p class="kicker">Technical report · Genome world model</p>
+        <h1>CENO: long-context genomic foundation models for evolutionary sequence interpretation and regulatory design</h1>
+        <p class="subtitle">
+          A family of autoregressive DNA models that preserve nucleotide-resolution grammar while extending usable context
+          to regulatory and chromatin scales, connecting pretraining, evolutionary post-training, and functional sequence
+          design in one framework.
+        </p>
+
+        <div class="authors">
+          <strong>CENO Team</strong>
+          <span>Shanghai AI Laboratory · long-context genomic modeling · variant interpretation · regulatory design</span>
+        </div>
+
+        <div class="resource-row" aria-label="Project resources">
+          <a href="assets/paper/CENO_Technical_Report_Version.pdf" target="_blank" rel="noreferrer">View PDF</a>
+          <a href="#paper">Paper details</a>
+          <a href="#method">Method</a>
+          <a href="#figures">Figures</a>
+          <a href="mailto:contact@intfold.com">Contact</a>
+        </div>
+
+        <div class="stat-row">
+          <article>
+            <strong>1,048,576</strong>
+            <span>maximum long-context continuation length</span>
+          </article>
+          <article>
+            <strong>300M / 600M / 1B</strong>
+            <span>model scales trained with a staged curriculum</span>
+          </article>
+          <article>
+            <strong>65 tasks</strong>
+            <span>comprehensive variant-effect benchmark coverage</span>
+          </article>
+          <article>
+            <strong>92.94x</strong>
+            <span>wet-lab enrichment in antimicrobial discovery</span>
+          </article>
+        </div>
+
+        <div class="hero-visual" aria-label="CENO long-context genome visualization">
+          <canvas id="genomeCanvas" width="1120" height="430"></canvas>
+          <div class="visual-card">
+            <span>Interactive schematic</span>
+            <strong>Sequence, structure, evolution, design</strong>
+            <small>long DNA tracks · chromatin-like contacts · distal routing</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section" id="overview">
+        <div class="section-heading">
+          <p>Overview</p>
+          <h2>From local DNA syntax to megabase-scale genomic reasoning</h2>
+        </div>
+        <div class="abstract-body">
+          <p>
+            Real genomic function is rarely determined by short local fragments alone. Enhancers can act far from
+            target genes, chromatin folds into three-dimensional structures, and noncoding variants may affect gene
+            expression through spatial contacts. CENO targets these long-range regulatory relationships by modeling
+            sequence, structure, evolution, and function at megabase scale.
+          </p>
+          <p>
+            The report introduces a training-to-design framework: single-sequence long-context pretraining builds the
+            genomic backbone, packed multiple-sequence-alignment post-training adds evolutionary constraint, and
+            supervised plus reinforcement learning adapts the model toward functional regulatory sequence generation.
+          </p>
+        </div>
+      </section>
+
+      <section class="paper-section" id="method">
+        <div class="section-heading">
+          <p>Method</p>
+          <h2>A three-stage route for genome foundation modeling</h2>
+        </div>
+        <div class="method-strip" aria-label="CENO method overview">
+          <article>
+            <span>1</span>
+            <strong>Long-context pretraining</strong>
+            <small>8k cross-domain genomic pretraining followed by 131k and 1M whole-genome continuation.</small>
+          </article>
+          <article>
+            <span>2</span>
+            <strong>Evolutionary post-training</strong>
+            <small>Real MSA contexts let variant scoring compare reference and mutant alleles under shared homology.</small>
+          </article>
+          <article>
+            <span>3</span>
+            <strong>Functional design optimization</strong>
+            <small>CENO-based generators and oracles support enhancer design and wet-lab candidate prioritization.</small>
+          </article>
+        </div>
+
+        <div class="architecture-layout">
+          <div class="module-list">
+            <article>
+              <strong>Mamba-2 sequence mixing</strong>
+              <span>Provides efficient long-range state tracking for million-token DNA windows.</span>
+            </article>
+            <article>
+              <strong>Sparse attention</strong>
+              <span>Supports motif composition, local regulatory interactions, and explicit cross-fragment routing.</span>
+            </article>
+            <article>
+              <strong>Mixture-of-experts capacity</strong>
+              <span>Expands effective model capacity while keeping per-token active compute practical.</span>
+            </article>
+          </div>
+          <div class="pipeline" aria-label="CENO pipeline">
+            <div>DNA tokens</div>
+            <div>Causal hybrid backbone</div>
+            <div>MSA post-training</div>
+            <div>Variant likelihood deltas</div>
+            <div>Regulatory sequence candidates</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section" id="long-context">
+        <div class="section-heading">
+          <p>Long context</p>
+          <h2>Million-base context becomes biological signal, not just a larger input box</h2>
+        </div>
+        <div class="highlight-grid">
+          <article>
+            <span>01</span>
+            <h3>Distant retrieval</h3>
+            <p>CENO models retain synthetic DNA needle-retrieval scores above threshold across 32k, 64k, and 131k contexts.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>TAD-scale attention</h3>
+            <p>Long-context continuation increases within/across-boundary attention in representative chromatin-domain loci.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Frozen-state probes</h3>
+            <p>Linear probes over frozen states recover TAD boundary information across human and mouse settings.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Distance-aware VEP gains</h3>
+            <p>TraitGym improvements grow with variant-gene distance, with the largest gains beyond 100 kb.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-section" id="variant">
+        <div class="section-heading">
+          <p>Variant interpretation</p>
+          <h2>Post-training connects current sequence grammar with evolutionary constraint</h2>
+        </div>
+        <div class="benchmark-matrix">
+          <article>
+            <small>Long-prefill throughput</small>
+            <strong>515.83</strong>
+            <span>CENO 600M generated tokens/s/GPU at 131k input with 512-token output on the reported setup.</span>
+          </article>
+          <article>
+            <small>Boundary probe</small>
+            <strong>0.960</strong>
+            <span>Mean AUROC for CENO 600M at 131k in human TAD boundary probes.</span>
+          </article>
+          <article>
+            <small>Variant benchmark</small>
+            <strong>&gt; Evo2-40B</strong>
+            <span>CENO-1B reports stronger aggregate performance across the 65-task variant-effect benchmark.</span>
+          </article>
+          <article>
+            <small>Needle retrieval</small>
+            <strong>6.43</strong>
+            <span>CENO 600M reported score at 131k context and 50% insertion depth.</span>
+          </article>
+          <article>
+            <small>CRE wet validation</small>
+            <strong>7.856</strong>
+            <span>Wet-lab log2FC for a generated enhancer candidate, above the natural enhancer control.</span>
+          </article>
+          <article>
+            <small>Antimicrobial screening</small>
+            <strong>46.47%</strong>
+            <span>Experimental positive rate after model-assisted prioritization, up from roughly 0.5% baseline.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-section" id="design">
+        <div class="section-heading">
+          <p>Design</p>
+          <h2>From reading genomes to writing experimentally testable regulatory sequences</h2>
+        </div>
+        <div class="contribution-list">
+          <article>
+            <strong>Enhancer generation</strong>
+            <span>CENO-generated enhancer candidates show wet-lab activity beyond natural enhancer controls in the report.</span>
+          </article>
+          <article>
+            <strong>Cell-type-specific regulation</strong>
+            <span>The design workflow couples a CENO-based accessibility oracle with conditional SFT and GRPO optimization.</span>
+          </article>
+          <article>
+            <strong>Candidate prioritization</strong>
+            <span>Model-guided screening can concentrate experimental effort on a smaller, higher-value functional sequence set.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-section" id="figures">
+        <div class="section-heading">
+          <p>Figures</p>
+          <h2>Key visuals from the technical report</h2>
+        </div>
+        <div class="figure-grid">
+          <figure>
+            <img src="assets/figures/ceno-figure-1-05.png" alt="CENO training-to-design paradigm and model overview" />
+            <figcaption>Figure 1. Training-to-design paradigm, hybrid backbone, context curriculum, data composition, and throughput.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/ceno-figure-2-07.png" alt="CENO long-context retrieval and chromatin-scale readouts" />
+            <figcaption>Figure 2. Long-context retrieval, TAD-scale attention, annotation-linked attention, and boundary probes.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="paper-section paper-upload" id="paper">
+        <div class="section-heading">
+          <p>Paper</p>
+          <h2>Site-hosted technical report for same-day citation</h2>
+        </div>
+        <div class="paper-layout">
+          <div class="paper-card">
+            <img src="assets/figures/ceno-paper-cover-01.png" alt="First page preview of the CENO technical report" />
+            <div>
+              <small>Technical report PDF</small>
+              <strong>CENO: Long-context genomic foundation models for evolutionary sequence interpretation and regulatory design</strong>
+              <p>
+                Until an arXiv or DOI link is available, this GitHub Pages site can host the report directly and provide a stable paper URL.
+              </p>
+              <div class="resource-row compact">
+                <a href="assets/paper/CENO_Technical_Report_Version.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+                <a href="assets/paper/CENO_Technical_Report_Version.pdf" download>Download</a>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-preview">
+            <object
+              data="assets/paper/CENO_Technical_Report_Version.pdf"
+              type="application/pdf"
+              aria-label="CENO technical report PDF preview"
+            >
+              <div class="empty-preview">
+                <strong>PDF preview is not supported in this browser</strong>
+                <a href="assets/paper/CENO_Technical_Report_Version.pdf" target="_blank" rel="noreferrer">Open the PDF in a new tab</a>
+              </div>
+            </object>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>CENO Genome Foundation Model</span>
+      <span>For correspondence: <a href="mailto:contact@intfold.com">contact@intfold.com</a></span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
