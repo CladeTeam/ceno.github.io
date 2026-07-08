@@ -111,7 +111,7 @@ if (menuToggle && siteNav) {
 
 /* ---------- Scroll reveal ---------- */
 const revealTargets = document.querySelectorAll(
-  ".hero-figure, .stage, .scale-strip, .act-head, .figure-block, .stat-list article, .rank-callout, .paper-card, .citation-box, .section-heading"
+  ".hero-figure, .stage, .scale-strip, .act-head, .figure-block, .stat-list article, .capability-grid article, .rank-callout, .paper-card, .citation-box, .section-heading"
 );
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

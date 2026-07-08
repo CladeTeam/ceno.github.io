@@ -6,3 +6,4 @@ grc_biology_genomics_2026_2027_data.json
 grc_doc_render/
 tmp/
 tools/
+.DS_Store

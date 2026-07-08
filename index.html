@@ -24,6 +24,12 @@
     <meta name="citation_pdf_url" content="assets/paper/CENO_Technical_Report_Version.pdf" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <title>CENO | Genome-scale world model</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script>
       (function () {
@@ -48,6 +54,7 @@
         <a href="#understand">Understand</a>
         <a href="#evolve">Evolve</a>
         <a href="#design">Design</a>
+        <a href="#generate">Generate</a>
         <a href="#benchmark">Benchmark</a>
         <a href="#paper">Paper</a>
       </nav>
@@ -107,12 +114,12 @@
             data-title="Figure 1 · Training-to-design paradigm"
             data-caption="Hybrid backbone, long-context curriculum, data composition, and the pre-train / post-train / RL design workflow."
           >
-            <img src="assets/figures/ceno-figure-1-display.png" alt="CENO architecture and training-to-design overview" />
-            <span class="zoom-hint">Click to enlarge</span>
+            <img src="assets/figures/ceno-figure-1-hero.png" alt="CENO training-to-design paradigm: pre-training, post-training, and reinforcement learning" />
+            <span class="zoom-hint">Click for the full figure</span>
           </button>
           <div class="figure-meta">
-            <span>Figure 1 · System overview</span>
-            <strong>From a hybrid backbone to a full training-to-design workflow</strong>
+            <span>Figure 1a · Training-to-design paradigm</span>
+            <strong>One backbone: pre-train &rarr; post-train &rarr; reinforcement learning. Click for the full system figure.</strong>
           </div>
         </aside>
       </section>
@@ -123,8 +130,9 @@
           <p class="kicker">The approach</p>
           <h2>One backbone, three stages: pre-train, evolve, design</h2>
           <p class="lede">
-            A "genome world model" keeps nucleotide-level state over very long sequences and exposes a single likelihood
-            interface. That one interface is what lets the same model interpret, perturb, and generate DNA.
+            A genomic world model keeps nucleotide-level state over very long sequences and exposes one likelihood
+            interface. That single interface is what lets the same model perform four reusable operations over genome
+            sequence space &mdash; <em>completion, perturbation, conditioning, and design</em>.
           </p>
         </div>
 
@@ -160,6 +168,7 @@
           </li>
         </ol>
 
+        <p class="strip-eyebrow">CENO at a glance</p>
         <div class="scale-strip" aria-label="Key model facts">
           <article>
             <strong>1M</strong>
@@ -170,12 +179,12 @@
             <span>300M / 600M / 1B parameters, one staged curriculum</span>
           </article>
           <article>
-            <strong>65 tasks</strong>
-            <span>zero-shot variant-effect evaluation across DNA task families</span>
+            <strong>~8&times;</strong>
+            <span>faster long-context generation than Evo 2, with no out-of-memory failures</span>
           </article>
           <article>
             <strong>1 interface</strong>
-            <span>shared likelihood for understanding, scoring, and design</span>
+            <span>one likelihood for completion, perturbation, conditioning, and design</span>
           </article>
         </div>
       </section>
@@ -200,7 +209,7 @@
               data-title="Figure 2 · Long-context interpretation"
               data-caption="Needle retrieval, TAD-scale attention, annotation-linked attention, and species-wide boundary probes."
             >
-              <img src="assets/figures/ceno-figure-2-display.png" alt="CENO long-context retrieval and chromatin-scale readouts" />
+              <img src="assets/figures/ceno-figure-2-display.png" alt="CENO long-context retrieval and chromatin-scale readouts" loading="lazy" decoding="async" />
               <span class="zoom-hint">Click to enlarge</span>
             </button>
             <figcaption>Figure 2 &mdash; retrieval and chromatin-scale readouts under extended context.</figcaption>
@@ -240,13 +249,13 @@
               class="figure-thumb"
               type="button"
               data-full="assets/figures/ceno-figure-3-posttrain.png"
-              data-title="Figure 3 · Post-training with real MSA context"
+              data-title="Figure 4 · Post-training with real MSA context"
               data-caption="MSA context, reference-minus-mutant likelihood scoring, matched BRCA comparisons, and cross-species enrichment."
             >
-              <img src="assets/figures/ceno-figure-3-posttrain.png" alt="CENO post-training with real MSA context" />
+              <img src="assets/figures/ceno-figure-3-posttrain.png" alt="CENO post-training with real MSA context" loading="lazy" decoding="async" />
               <span class="zoom-hint">Click to enlarge</span>
             </button>
-            <figcaption>Figure 3 &mdash; evolutionary context improves matched variant-effect scoring.</figcaption>
+            <figcaption>Figure 4 &mdash; evolutionary context improves matched variant-effect scoring.</figcaption>
           </figure>
 
           <div class="stat-list">
@@ -283,13 +292,13 @@
               class="figure-thumb"
               type="button"
               data-full="assets/figures/ceno-figure-4-enhancer-design.png"
-              data-title="Figure 4 · Cell-type-specific enhancer design"
+              data-title="Figure 5 · Cell-type-specific enhancer design"
               data-caption="Accessibility oracle, motif interpretation, and generated CRE specificity in mouse cortex, toward AAV validation."
             >
-              <img src="assets/figures/ceno-figure-4-enhancer-design.png" alt="CENO cell-type-specific enhancer prediction and design" />
+              <img src="assets/figures/ceno-figure-4-enhancer-design.png" alt="CENO cell-type-specific enhancer prediction and design" loading="lazy" decoding="async" />
               <span class="zoom-hint">Click to enlarge</span>
             </button>
-            <figcaption>Figure 4 &mdash; accessibility oracle, motif grammar, and generated enhancer specificity.</figcaption>
+            <figcaption>Figure 5 &mdash; accessibility oracle, motif grammar, and generated enhancer specificity.</figcaption>
           </figure>
 
           <div class="stat-list">
@@ -309,31 +318,66 @@
         </div>
       </section>
 
+      <!-- GENERATE -->
+      <section class="band" id="generate">
+        <div class="section-heading">
+          <p class="kicker">Capability</p>
+          <h2>Writing genome-scale sequence</h2>
+          <p class="lede">
+            The same pretrained backbone also completes and writes DNA. Withheld-sequence recovery improves with
+            model scale and long-context training, and the 1&nbsp;Mb context reaches into chromatin-loop and
+            TAD-scale structure &mdash; run efficiently on the vLLM inference stack.
+          </p>
+        </div>
+
+        <div class="capability-grid">
+          <article>
+            <strong>CENO 1B &asymp; Evo&nbsp;2-7B</strong>
+            <span>Gene-scale recovery across eukaryotic, bacterial, and archaeal species &mdash; matching a 7B model with far fewer parameters.</span>
+          </article>
+          <article>
+            <strong>100&nbsp;kb &ndash; 1&nbsp;Mb</strong>
+            <span>Generates engineered plasmids, chloroplast genomes, and yeast chromosomes; below 100&nbsp;kb it reaches human mitochondrial genomes and individual genes.</span>
+          </article>
+          <article>
+            <strong>1&nbsp;Mb context</strong>
+            <span>Megabase generation captures chromatin loops and TAD-scale structure at representative loci such as MYC and PAX.</span>
+          </article>
+        </div>
+      </section>
+
       <!-- BENCHMARK -->
       <section class="band" id="benchmark">
         <div class="section-heading">
           <p class="kicker">Benchmark</p>
-          <h2>Zero-shot variant effects across DNA task families</h2>
+          <h2>Zero-shot variant effects across ten task families</h2>
           <p class="lede">
-            CENO is evaluated head-to-head against many published genome models on a 65-task suite spanning splicing,
-            BRCA1/BRCA2, TraitGym, clinical, enhancer&ndash;gene, and structural-variant settings.
+            A single pretrained likelihood-delta score is evaluated against roughly fifty published genome models,
+            spanning splice variants, BRCA1/BRCA2, TraitGym, ClinVar, causal eQTLs, expression perturbation,
+            enhancer&ndash;gene links, structural variants, molecular fitness, and metabolic pathways.
           </p>
         </div>
 
         <div class="benchmark-body">
           <div class="rank-callout">
-            <div class="rank-big"><strong>#1</strong><span>CENO 1B (Stage IV)</span></div>
-            <div class="rank-big alt"><strong>#2</strong><span>CENO 1B (Stage III)</span></div>
-            <p>Top two places in the filtered cross-family summary, ahead of prior genome foundation models.</p>
+            <div class="rank-big"><strong>#1</strong><span>CENO 1B · 1M context</span></div>
+            <div class="rank-big alt"><strong>#2</strong><span>CENO 1B · 131k context</span></div>
+            <p>Top two of the filtered cross-family ranking, ahead of Evo 2 40B at #3.</p>
+            <ul class="task-highlights">
+              <li><strong>Structural-variant deletions</strong> — CENO 1B takes the top three (AVG2 up to 0.633).</li>
+              <li><strong>Pathogenic ClinVar SNVs</strong> — three CENO 1B checkpoints trail only Evo 2 40B (AUROC to 0.914).</li>
+              <li><strong>Causal eQTLs</strong> — CENO 1B leads the nearest variant-to-TSS bin (AUROC 0.669).</li>
+            </ul>
             <div class="baselines">
               <small>Compared against</small>
               <ul>
-                <li>Evo2 (7B / 40B)</li>
-                <li>Nucleotide Transformer v2</li>
+                <li>Evo 2 (7B / 40B)</li>
+                <li>Nucleotide Transformer</li>
                 <li>Caduceus</li>
                 <li>HyenaDNA</li>
                 <li>DNABERT</li>
                 <li>GENERator</li>
+                <li>Genos</li>
                 <li>GPN</li>
                 <li>Grover</li>
                 <li>OmniReg-GPT</li>
@@ -345,13 +389,13 @@
               class="figure-thumb"
               type="button"
               data-full="assets/figures/ceno-figure-variant-benchmark.png"
-              data-title="Variant benchmark · Zero-shot perturbation summary"
-              data-caption="Cross-family ranking and task-family read-outs for zero-shot variant-effect prediction."
+              data-title="Figure 3 · Cross-task zero-shot variant-effect benchmark"
+              data-caption="Filtered cross-family ranking and task-level read-outs for zero-shot variant-effect prediction across ten task families."
             >
-              <img src="assets/figures/ceno-figure-variant-benchmark.png" alt="CENO zero-shot variant-effect benchmark overview" />
+              <img src="assets/figures/ceno-figure-variant-benchmark.png" alt="CENO zero-shot variant-effect benchmark overview" loading="lazy" decoding="async" />
               <span class="zoom-hint">Click to enlarge</span>
             </button>
-            <figcaption>Cross-family zero-shot perturbation summary and task-specific read-outs.</figcaption>
+            <figcaption>Figure 3 &mdash; cross-family zero-shot ranking and task-specific read-outs.</figcaption>
           </figure>
         </div>
       </section>
@@ -365,7 +409,7 @@
 
         <div class="paper-layout">
           <div class="paper-card">
-            <img src="assets/figures/ceno-paper-cover-01.png" alt="First page preview of the CENO technical report" />
+            <img src="assets/figures/ceno-paper-cover-01.png" alt="First page preview of the CENO technical report" loading="lazy" decoding="async" />
             <div>
               <small>Technical report PDF</small>
               <strong>CENO: A Genome-Scale World Model for Evolutionary Sequence Interpretation and Programmable Regulatory Design</strong>
@@ -406,10 +450,10 @@
           <button class="icon-button" type="button" data-lightbox-close aria-label="Close figure viewer">Close</button>
         </div>
         <div class="lightbox-stage">
-          <button class="nav-button prev" type="button" data-lightbox-prev aria-label="Previous figure">Prev</button>
           <img id="lightboxImage" src="" alt="" />
-          <button class="nav-button next" type="button" data-lightbox-next aria-label="Next figure">Next</button>
         </div>
+        <button class="nav-button prev" type="button" data-lightbox-prev aria-label="Previous figure">Prev</button>
+        <button class="nav-button next" type="button" data-lightbox-next aria-label="Next figure">Next</button>
       </div>
     </div>
 

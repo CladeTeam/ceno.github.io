@@ -186,29 +186,30 @@ main {
 /* ---------- Hero ---------- */
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(400px, 0.86fr);
-  gap: 56px;
-  align-items: center;
-  padding: 76px 0 66px;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+  padding: 64px 0 58px;
   width: min(var(--maxw), calc(100% - 48px));
   margin: 0 auto;
 }
 
 .hero-copy {
   min-width: 0;
+  text-align: center;
 }
 
 h1 {
-  max-width: 15ch;
-  margin: 0 0 22px;
+  max-width: 20ch;
+  margin: 0 auto 22px;
   font-size: clamp(2.4rem, 4.6vw, 3.7rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
 .subtitle {
-  max-width: 46ch;
-  margin-bottom: 22px;
+  max-width: 52ch;
+  margin: 0 auto 22px;
   color: #33424e;
   font-size: 1.16rem;
   line-height: 1.6;
@@ -227,6 +228,7 @@ h1 {
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 26px;
 }
@@ -255,6 +257,7 @@ h1 {
 
 .authors {
   display: grid;
+  justify-items: center;
   gap: 3px;
   margin-bottom: 24px;
   color: var(--muted);
@@ -304,6 +307,10 @@ h1 {
 
 .resource-row.compact {
   margin-top: 18px;
+}
+
+.hero-copy .resource-row {
+  justify-content: center;
 }
 
 /* ---------- Hero figure ---------- */
@@ -576,8 +583,8 @@ h1 {
 
 .act-body {
   display: grid;
-  grid-template-columns: minmax(0, 1.62fr) minmax(260px, 0.38fr);
-  gap: 26px;
+  grid-template-columns: 1fr;
+  gap: 22px;
   align-items: start;
 }
 
@@ -602,7 +609,8 @@ h1 {
 /* ---------- Stat list ---------- */
 .stat-list {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   align-content: start;
 }
 
@@ -648,6 +656,9 @@ h1 {
   display: grid;
   gap: 14px;
   align-content: start;
+  align-self: start;
+  position: sticky;
+  top: 88px;
   padding: 26px 24px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -850,18 +861,19 @@ h1 {
 
 .lightbox-stage {
   position: relative;
-  display: grid;
-  place-items: center;
   min-height: 0;
+  overflow: auto;
   padding: 18px 66px;
   background: #f6f8fa;
+  text-align: center;
 }
 
 .lightbox-stage img {
   display: block;
+  width: auto;
   max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  height: auto;
+  margin: 0 auto;
 }
 
 .nav-button {
@@ -911,13 +923,8 @@ footer a {
   }
 
   .hero {
-    grid-template-columns: 1fr;
     gap: 34px;
     padding: 48px 0 40px;
-  }
-
-  .hero-figure {
-    max-width: 640px;
   }
 
   .stages {
@@ -933,6 +940,10 @@ footer a {
   .benchmark-body,
   .paper-layout {
     grid-template-columns: 1fr;
+  }
+
+  .rank-callout {
+    position: static;
   }
 
   .stat-list {
@@ -979,6 +990,11 @@ footer a {
 
   .paper-card {
     grid-template-columns: 1fr;
+  }
+
+  .citation-box pre {
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .paper-card img {
@@ -1241,7 +1257,7 @@ footer a {
   color: var(--ink-2);
 }
 
-[data-theme="dark"] .resource-row a,
+[data-theme="dark"] .resource-row a:not(.primary-action),
 [data-theme="dark"] .hero-figure,
 [data-theme="dark"] .stage,
 [data-theme="dark"] .figure-block,
@@ -1281,8 +1297,143 @@ footer a {
 }
 
 /* ============================================================
-   Mobile menu (<= 860px)
+   Refinements: numerals, generation band, benchmark highlights,
+   stats-strip framing, monospace
    ============================================================ */
+
+/* Tabular, lining figures so stacked numbers align cleanly */
+.stat-list strong,
+.scale-strip strong,
+.rank-big strong,
+.capability-grid strong,
+.stat-list strong small {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Eyebrow that frames the dark stats strip as an intentional band */
+.strip-eyebrow {
+  margin: 0 auto 14px;
+  color: var(--quiet);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Tie the dark strip to the brand palette with a thin top accent */
+.scale-strip {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.scale-strip::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(120deg, var(--blue), var(--purple));
+}
+
+/* In dark mode the strip must separate from the near-black page */
+[data-theme="dark"] .scale-strip {
+  background: linear-gradient(120deg, #172230, #1f2e3f);
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Generation capability grid ---------- */
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.capability-grid article {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 26px 24px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--purple);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--soft-shadow);
+}
+
+.capability-grid strong {
+  color: var(--ink);
+  font-size: 1.42rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.capability-grid span {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ---------- Benchmark task highlights ---------- */
+.task-highlights {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 2px;
+  padding: 0;
+  list-style: none;
+}
+
+.task-highlights li {
+  padding-left: 18px;
+  position: relative;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.task-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: linear-gradient(120deg, var(--blue), var(--purple));
+}
+
+.task-highlights strong {
+  color: var(--ink-2);
+  font-weight: 700;
+}
+
+/* Monospace for the citation block */
+.citation-box code {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+@media (max-width: 1080px) {
+  .capability-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stats strip: drop to two columns before the numbers crowd (tablet range) */
+@media (max-width: 900px) {
+  .scale-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .scale-strip article:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .scale-strip article:nth-child(n + 3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
 @media (max-width: 860px) {
   .topbar {
     position: sticky;
