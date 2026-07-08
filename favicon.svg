@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="18" fill="#ffffff"/>
+  <rect x="9" y="9" width="110" height="110" rx="14" fill="none" stroke="#0069aa" stroke-width="8"/>
+  <text x="64" y="76" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#111519">CENO</text>
+</svg>

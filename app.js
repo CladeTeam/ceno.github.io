@@ -1,88 +1,156 @@
-const canvas = document.querySelector("#genomeCanvas");
-const ctx = canvas.getContext("2d");
+const figureButtons = Array.from(document.querySelectorAll(".figure-thumb"));
+const lightbox = document.querySelector("#figureLightbox");
+const lightboxImage = document.querySelector("#lightboxImage");
+const lightboxTitle = document.querySelector("#lightboxTitle");
+const lightboxCaption = document.querySelector("#lightboxCaption");
+const closeButtons = document.querySelectorAll("[data-lightbox-close]");
+const previousButton = document.querySelector("[data-lightbox-prev]");
+const nextButton = document.querySelector("[data-lightbox-next]");
 
-let tick = 0;
+let activeFigureIndex = 0;
 
-function resizeCanvas() {
-  const rect = canvas.getBoundingClientRect();
-  const scale = window.devicePixelRatio || 1;
-  canvas.width = Math.max(320, Math.floor(rect.width * scale));
-  canvas.height = Math.max(360, Math.floor(rect.height * scale));
-  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+function getFigureData(index) {
+  const button = figureButtons[index];
+  return {
+    src: button.dataset.full,
+    title: button.dataset.title,
+    caption: button.dataset.caption,
+    alt: button.querySelector("img")?.alt || button.dataset.title,
+  };
 }
 
-function drawGenomeStage() {
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  tick += 0.01;
+function renderFigure(index) {
+  activeFigureIndex = (index + figureButtons.length) % figureButtons.length;
+  const figure = getFigureData(activeFigureIndex);
 
-  ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = "rgba(255,255,255,0.2)";
-  ctx.fillRect(0, 0, width, height);
+  lightboxImage.src = figure.src;
+  lightboxImage.alt = figure.alt;
+  lightboxTitle.textContent = figure.title;
+  lightboxCaption.textContent = figure.caption;
+}
 
-  const left = width * 0.08;
-  const right = width * 0.92;
-  const trackTop = height * 0.18;
-  const rowGap = height * 0.13;
-  const colors = ["#1fbf7a", "#0c8a9a", "#355c9a", "#d95f73"];
+function openLightbox(index) {
+  renderFigure(index);
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("lightbox-open");
+  nextButton.focus();
+}
 
-  for (let row = 0; row < 4; row += 1) {
-    const y = trackTop + row * rowGap;
-    ctx.strokeStyle = "rgba(94,111,104,0.25)";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(left, y);
-    ctx.lineTo(right, y);
-    ctx.stroke();
+function closeLightbox() {
+  lightbox.classList.remove("is-open");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("lightbox-open");
+  lightboxImage.removeAttribute("src");
+}
 
-    for (let i = 0; i < 26; i += 1) {
-      const x = left + ((right - left) / 25) * i;
-      const phase = Math.sin(tick * (row + 1) + i * 0.7);
-      const h = 10 + Math.abs(phase) * 32;
-      ctx.fillStyle = colors[(i + row) % colors.length];
-      ctx.globalAlpha = 0.28 + Math.abs(phase) * 0.45;
-      ctx.fillRect(x - 3, y - h / 2, 6, h);
-    }
-  }
-  ctx.globalAlpha = 1;
+figureButtons.forEach((button, index) => {
+  button.addEventListener("click", () => openLightbox(index));
+});
 
-  const matrixSize = Math.min(width, height) * 0.34;
-  const mx = width * 0.52;
-  const my = height * 0.58;
-  const cells = 13;
-  const cell = matrixSize / cells;
+closeButtons.forEach((button) => {
+  button.addEventListener("click", closeLightbox);
+});
 
-  for (let y = 0; y < cells; y += 1) {
-    for (let x = 0; x < cells; x += 1) {
-      const diagonal = 1 - Math.min(1, Math.abs(x - y) / cells);
-      const boundary = x > 5 && y < 6 ? 0.28 : 1;
-      const pulse = 0.08 * Math.sin(tick * 5 + x + y);
-      const alpha = Math.max(0.05, (diagonal * boundary + pulse) * 0.72);
-      ctx.fillStyle = `rgba(12, 138, 154, ${alpha})`;
-      ctx.fillRect(mx + x * cell, my + y * cell, cell - 1, cell - 1);
-    }
+previousButton.addEventListener("click", () => renderFigure(activeFigureIndex - 1));
+nextButton.addEventListener("click", () => renderFigure(activeFigureIndex + 1));
+
+document.addEventListener("keydown", (event) => {
+  if (!lightbox.classList.contains("is-open")) {
+    return;
   }
 
-  const needleX = left + (right - left) * (0.28 + Math.sin(tick) * 0.04);
-  const queryX = left + (right - left) * 0.82;
-  ctx.strokeStyle = "rgba(217,95,115,0.75)";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(needleX, trackTop - 38);
-  ctx.bezierCurveTo(width * 0.36, height * 0.08, width * 0.64, height * 0.08, queryX, trackTop - 12);
-  ctx.stroke();
+  if (event.key === "Escape") {
+    closeLightbox();
+  }
 
-  ctx.fillStyle = "#d95f73";
-  [needleX, queryX].forEach((x) => {
-    ctx.beginPath();
-    ctx.arc(x, trackTop - 38, 6, 0, Math.PI * 2);
-    ctx.fill();
+  if (event.key === "ArrowLeft") {
+    renderFigure(activeFigureIndex - 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    renderFigure(activeFigureIndex + 1);
+  }
+});
+
+/* ---------- Theme toggle ---------- */
+const themeToggle = document.querySelector(".theme-toggle");
+const root = document.documentElement;
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("ceno-theme", next);
+    } catch (e) {
+      /* ignore storage errors */
+    }
+  });
+}
+
+/* ---------- Mobile menu ---------- */
+const menuToggle = document.querySelector(".menu-toggle");
+const siteNav = document.querySelector("#siteNav");
+
+if (menuToggle && siteNav) {
+  const setMenu = (open) => {
+    siteNav.classList.toggle("open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+
+  menuToggle.addEventListener("click", () => {
+    setMenu(!siteNav.classList.contains("open"));
   });
 
-  requestAnimationFrame(drawGenomeStage);
+  siteNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenu(false));
+  });
 }
 
-window.addEventListener("resize", resizeCanvas);
+/* ---------- Scroll reveal ---------- */
+const revealTargets = document.querySelectorAll(
+  ".hero-figure, .stage, .scale-strip, .act-head, .figure-block, .stat-list article, .rank-callout, .paper-card, .citation-box, .section-heading"
+);
 
-resizeCanvas();
-drawGenomeStage();
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (revealTargets.length && "IntersectionObserver" in window && !prefersReducedMotion) {
+  revealTargets.forEach((el) => el.classList.add("reveal"));
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+  revealTargets.forEach((el) => revealObserver.observe(el));
+}
+
+/* ---------- Active nav highlight ---------- */
+const navLinks = Array.from(document.querySelectorAll("#siteNav a"));
+const sections = navLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+if (sections.length && "IntersectionObserver" in window) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach((link) =>
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`)
+          );
+        }
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+  );
+  sections.forEach((section) => navObserver.observe(section));
+}
