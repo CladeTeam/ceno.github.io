@@ -1294,6 +1294,22 @@ footer a {
   background: #fff;
 }
 
+/* Present figures as an intentional light "plate" in dark mode. The PNGs are
+   colored scientific diagrams, so inverting would corrupt the data colors;
+   instead give them a white matte, rounded inner corners, and a firmer frame. */
+[data-theme="dark"] .figure-thumb:not(.hero-thumb) {
+  padding: 16px;
+}
+
+[data-theme="dark"] .figure-thumb img {
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .figure-block,
+[data-theme="dark"] .hero-figure {
+  border-color: var(--line-strong);
+}
+
 [data-theme="dark"] .lab-link img {
   filter: brightness(0) invert(1) opacity(0.85);
 }
@@ -1421,8 +1437,9 @@ footer a {
   }
 }
 
-/* Stats strip: drop to two columns before the numbers crowd (tablet range) */
-@media (max-width: 900px) {
+/* Stats strip: drop to two columns before the numbers crowd (tablet range).
+   Scoped to >440px so the <=440px single-column rule below still wins on phones. */
+@media (min-width: 441px) and (max-width: 900px) {
   .scale-strip {
     grid-template-columns: 1fr 1fr;
   }
@@ -1628,7 +1645,9 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
+  row-gap: 4px;
   margin-top: 10px;
   color: var(--quiet);
   font-size: 0.72rem;
