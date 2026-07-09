@@ -88,6 +88,16 @@
             of mutations, and <em>design</em> new regulatory sequences.
           </p>
 
+          <div class="dna-ribbon" aria-hidden="true">
+            <div class="dna-track"></div>
+            <div class="dna-legend">
+              <span class="dna-dot read"></span>read
+              <span class="dna-dot benign"></span>benign
+              <span class="dna-dot path"></span>pathogenic
+              <span class="dna-dot write"></span>write
+            </div>
+          </div>
+
           <div class="hero-tags">
             <span class="tag tag-blue">Understand · long context</span>
             <span class="tag tag-green">Evolve · variant effects</span>
@@ -134,6 +144,20 @@
             interface. That single interface is what lets the same model perform four reusable operations over genome
             sequence space &mdash; <em>completion, perturbation, conditioning, and design</em>.
           </p>
+        </div>
+
+        <div class="context-scale" aria-label="Context length grows from 8k to 1M tokens">
+          <div class="context-scale-head">
+            <span>Context length</span>
+            <strong>8k &rarr; 1M tokens</strong>
+          </div>
+          <div class="context-track">
+            <div class="context-fill"></div>
+            <span class="context-stop" style="left: 0%"><i></i><small>8k</small></span>
+            <span class="context-stop" style="left: 57.4%"><i></i><small>131k</small></span>
+            <span class="context-stop" style="left: 100%"><i></i><small>1M</small></span>
+            <span class="context-head"></span>
+          </div>
         </div>
 
         <ol class="stages">
@@ -286,6 +310,16 @@
           </p>
         </div>
 
+        <div class="design-gen" aria-hidden="true">
+          <div class="gen-prompt">
+            <span class="gen-label">prompt</span>
+            <span class="gen-token">&lt;Astro&gt;</span>
+            <span class="gen-arrow">&rarr; generate 500&nbsp;bp enhancer</span>
+            <span class="gen-count">0 bp</span>
+          </div>
+          <code class="gen-seq"></code>
+        </div>
+
         <div class="act-body">
           <figure class="figure-block">
             <button
@@ -363,6 +397,20 @@
             <div class="rank-big"><strong>#1</strong><span>CENO 1B · 1M context</span></div>
             <div class="rank-big alt"><strong>#2</strong><span>CENO 1B · 131k context</span></div>
             <p>Top two of the filtered cross-family ranking, ahead of Evo 2 40B at #3.</p>
+            <div class="rank-bars" aria-hidden="true">
+              <div class="rank-bar ceno">
+                <span class="rank-bar-label"><b>#1</b> CENO 1B · 1M</span>
+                <span class="rank-bar-track"><i style="--w: 100%"></i></span>
+              </div>
+              <div class="rank-bar ceno">
+                <span class="rank-bar-label"><b>#2</b> CENO 1B · 131k</span>
+                <span class="rank-bar-track"><i style="--w: 96%"></i></span>
+              </div>
+              <div class="rank-bar">
+                <span class="rank-bar-label"><b>#3</b> Evo 2 40B</span>
+                <span class="rank-bar-track"><i style="--w: 89%"></i></span>
+              </div>
+            </div>
             <ul class="task-highlights">
               <li><strong>Structural-variant deletions</strong> — CENO 1B takes the top three (AVG2 up to 0.633).</li>
               <li><strong>Pathogenic ClinVar SNVs</strong> — three CENO 1B checkpoints trail only Evo 2 40B (AUROC to 0.914).</li>
@@ -425,8 +473,11 @@
             </div>
           </div>
           <div class="citation-box">
-            <small>Citation</small>
-            <pre><code>@misc{ceno2026,
+            <div class="citation-head">
+              <small>Citation</small>
+              <button class="copy-cite" type="button">Copy</button>
+            </div>
+            <pre><code id="citationText">@misc{ceno2026,
   title  = {CENO: A Genome-Scale World Model for
             Evolutionary Sequence Interpretation and
             Programmable Regulatory Design},

@@ -18,6 +18,7 @@
   --purple: #7b4ad1;
   --purple-soft: #f1ebfc;
   --accent: var(--blue);
+  --vep-path: #d84545;
 
   --radius: 14px;
   --radius-sm: 9px;
@@ -1235,6 +1236,7 @@ footer a {
   --green-soft: rgba(55, 195, 154, 0.16);
   --purple: #a98bf3;
   --purple-soft: rgba(169, 139, 243, 0.18);
+  --vep-path: #f0736f;
 
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
   --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -1475,4 +1477,595 @@ footer a {
     display: none;
   }
 }
+
+/* ============================================================
+   Dynamic illustrations
+   (1) hero DNA read/score/write ribbon
+   (2) animated metric count-ups (JS-driven, no extra CSS)
+   (3) long-context scale bar
+   (4) stage-flow pulse
+   ============================================================ */
+
+/* ---------- (1) Hero DNA ribbon ---------- */
+.dna-ribbon {
+  max-width: 560px;
+  margin: 0 auto 24px;
+}
+
+.dna-track {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 60px;
+  padding: 0 14px 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--wash);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 1rem;
+  line-height: 1;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+
+.dna-base {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1ch;
+  text-align: center;
+  color: var(--quiet);
+  animation: dnaBaseIn 0.32s ease both;
+  transition: color 0.3s ease;
+}
+
+.dna-base.is-write {
+  color: var(--purple);
+  font-weight: 600;
+}
+
+.dna-base.is-score {
+  font-weight: 700;
+}
+
+.dna-base.is-score.is-benign {
+  color: var(--green);
+}
+
+.dna-base.is-score.is-path {
+  color: var(--vep-path);
+}
+
+.dna-score-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 7px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: dnaBubbleIn 0.3s ease both;
+}
+
+.dna-score-bubble.is-benign {
+  background: var(--green);
+}
+
+.dna-score-bubble.is-path {
+  background: var(--vep-path);
+}
+
+.dna-score-bubble .vep-sub {
+  letter-spacing: 0.02em;
+}
+
+.dna-score-bubble .vep-delta {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.95;
+}
+
+.dna-score-bubble .vep-tag {
+  padding: 0 4px;
+  border-radius: 4px;
+  font-family: Inter, sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.dna-score-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: 4px solid transparent;
+  transform: translateX(-50%);
+}
+
+.dna-score-bubble.is-benign::after {
+  border-top-color: var(--green);
+}
+
+.dna-score-bubble.is-path::after {
+  border-top-color: var(--vep-path);
+}
+
+@keyframes dnaBaseIn {
+  from {
+    opacity: 0;
+    transform: translateX(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dnaBubbleIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.dna-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dna-dot {
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  border-radius: 50%;
+}
+
+.dna-legend .dna-dot:first-child {
+  margin-left: 0;
+}
+
+.dna-dot.read {
+  background: var(--quiet);
+}
+.dna-dot.benign {
+  background: var(--green);
+}
+.dna-dot.path {
+  background: var(--vep-path);
+}
+.dna-dot.write {
+  background: var(--purple);
+}
+
+/* ---------- (3) Long-context scale bar ---------- */
+.context-scale {
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+
+.context-scale-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.context-scale-head span {
+  color: var(--quiet);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.context-scale-head strong {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.context-track {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--wash-2);
+}
+
+.context-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), var(--purple));
+  transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.context-scale.in-view .context-fill {
+  width: 100%;
+}
+
+.context-stop {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  transform: translate(-50%, -50%);
+  color: var(--muted);
+}
+
+.context-stop i {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.context-stop small {
+  position: absolute;
+  top: 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.context-stop:first-of-type small {
+  left: 0;
+  transform: none;
+}
+
+.context-stop:last-of-type small {
+  right: 0;
+  left: auto;
+}
+
+.context-head {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 0 0 rgba(123, 74, 209, 0.5);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: left 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.context-scale.in-view .context-head {
+  left: 100%;
+  opacity: 1;
+  animation: contextPulse 2.4s ease-in-out 1.6s infinite;
+}
+
+@keyframes contextPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(123, 74, 209, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(123, 74, 209, 0);
+  }
+}
+
+/* ---------- (4) Stage-flow pulse ---------- */
+.stage-arrow {
+  color: var(--line-strong);
+  animation: stageFlow 2.8s ease-in-out infinite;
+}
+
+.stages .stage-arrow:last-of-type {
+  animation-delay: 1.4s;
+}
+
+@keyframes stageFlow {
+  0%,
+  100% {
+    color: var(--line-strong);
+    transform: translateX(0);
+  }
+  50% {
+    color: var(--purple);
+    transform: translateX(4px);
+  }
+}
+
+[data-theme="dark"] .context-stop i {
+  background: var(--card);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .context-fill,
+  .context-head {
+    transition: none;
+  }
+  .context-scale .context-fill {
+    width: 100%;
+  }
+  .context-scale .context-head {
+    left: 100%;
+    opacity: 1;
+    animation: none;
+  }
+  .stage-arrow {
+    animation: none;
+    color: var(--line-strong);
+  }
+}
+
+@media (max-width: 1080px) {
+  /* arrows are rotated 90deg in the vertical stack: nudge downward */
+  @keyframes stageFlow {
+    0%,
+    100% {
+      color: var(--line-strong);
+      transform: rotate(90deg) translateX(0);
+    }
+    50% {
+      color: var(--purple);
+      transform: rotate(90deg) translateX(4px);
+    }
+  }
+}
+
+/* ---------- (5) Benchmark rank bars ---------- */
+.rank-bars {
+  display: grid;
+  gap: 9px;
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-strong);
+}
+
+.rank-bar {
+  display: grid;
+  gap: 4px;
+}
+
+.rank-bar-label {
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.rank-bar-label b {
+  margin-right: 4px;
+  color: var(--quiet);
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-bar.ceno .rank-bar-label b {
+  color: var(--purple);
+}
+
+.rank-bar-track {
+  height: 7px;
+  border-radius: 999px;
+  background: var(--wash-2);
+  overflow: hidden;
+}
+
+.rank-bar-track i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--line-strong);
+  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.rank-bar.ceno .rank-bar-track i {
+  background: linear-gradient(90deg, var(--blue), var(--purple));
+}
+
+.rank-bars.in-view .rank-bar-track i {
+  width: var(--w);
+}
+
+/* ---------- (6) Enhancer design: prompt -> generate ---------- */
+.design-gen {
+  max-width: 720px;
+  margin: 0 auto 26px;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--purple);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: var(--soft-shadow);
+  text-align: left;
+}
+
+.gen-prompt {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 11px;
+}
+
+.gen-label {
+  color: var(--quiet);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gen-token {
+  padding: 2px 9px;
+  border-radius: 6px;
+  color: #fff;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background: var(--purple);
+}
+
+.gen-arrow {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.gen-count {
+  margin-left: auto;
+  color: var(--purple);
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.gen-count.done {
+  color: var(--green);
+}
+
+.gen-seq {
+  display: block;
+  height: 84px;
+  overflow: hidden;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.gen-seq .motif {
+  padding: 1px 2px;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 600;
+  background: var(--purple);
+}
+
+.typer-cursor {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--purple);
+  animation: typerBlink 1s steps(1) infinite;
+}
+
+@keyframes typerBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- (7) Copy-to-clipboard citation ---------- */
+.citation-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.copy-cite {
+  padding: 5px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--ink-2);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--card);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.copy-cite:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copy-cite.copied {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+/* ---------- (8) Drifting hero glow ---------- */
+.hero::before {
+  animation: glowDriftA 17s ease-in-out infinite;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -80px;
+  left: -60px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(27, 100, 196, 0.16), transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: glowDriftB 21s ease-in-out infinite;
+}
+
+@keyframes glowDriftA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-34px, 22px) scale(1.08);
+  }
+}
+
+@keyframes glowDriftB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rank-bar-track i {
+    transition: none;
+  }
+  .rank-bars .rank-bar-track i {
+    width: var(--w);
+  }
+  .typer-cursor {
+    animation: none;
+  }
+  .hero::before,
+  .hero::after {
+    animation: none;
+  }
+}
+
 
