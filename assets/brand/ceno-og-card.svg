@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="og-ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12A69A"/>
+      <stop offset="0.5" stop-color="#2856E6"/>
+      <stop offset="1" stop-color="#7C3BE8"/>
+    </linearGradient>
+    <linearGradient id="og-rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#12A69A"/>
+      <stop offset="0.45" stop-color="#2856E6"/>
+      <stop offset="0.8" stop-color="#7C3BE8"/>
+      <stop offset="1" stop-color="#F45F4D"/>
+    </linearGradient>
+    <radialGradient id="og-glow-a" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#12A69A" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#12A69A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="og-glow-b" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7C3BE8" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#7C3BE8" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="og-ngap" maskUnits="userSpaceOnUse" x="-30" y="-30" width="240" height="260">
+      <rect x="-30" y="-30" width="240" height="260" fill="#fff"/>
+      <circle cx="85" cy="100" r="23" fill="#000"/>
+    </mask>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0E1C2E"/>
+  <ellipse cx="170" cy="90" rx="470" ry="360" fill="url(#og-glow-a)"/>
+  <ellipse cx="1050" cy="560" rx="470" ry="360" fill="url(#og-glow-b)"/>
+
+  <!-- CENO lockup: white letterforms, signature gradient O + coral intervention dash -->
+  <g transform="translate(280.8,150) scale(0.70)">
+    <g>
+      <path d="M164.62 49.52 A82 82 0 1 0 164.62 150.48" fill="none" stroke="#FFFFFF" stroke-width="36"
+            stroke-dasharray="94.2 11 45 11 24 11 14 11 24 11 45 11 300"/>
+    </g>
+    <g transform="translate(246,0)">
+      <rect x="0" y="0" width="170" height="36" rx="5" fill="#FFFFFF"/>
+      <rect x="0" y="82" width="170" height="36" rx="5" fill="#FFFFFF"/>
+      <rect x="0" y="164" width="170" height="36" rx="5" fill="#FFFFFF"/>
+    </g>
+    <g transform="translate(462,0)">
+      <g mask="url(#og-ngap)">
+        <path d="M0 0 H36 V200 H0 Z M134 0 H170 V200 H134 Z" fill="#FFFFFF"/>
+        <path d="M0 0 L42 0 L170 200 L128 200 Z" fill="#FFFFFF"/>
+      </g>
+      <circle cx="85" cy="100" r="15" fill="#12A69A"/>
+    </g>
+    <g transform="translate(678,0)">
+      <path d="M178.83 77.40 A82 82 0 1 0 178.83 122.60" fill="none" stroke="url(#og-ring)" stroke-width="36"/>
+      <rect x="168" y="91" width="64" height="18" rx="9" fill="#F45F4D"/>
+    </g>
+    <line x1="0" y1="281" x2="115" y2="281" stroke="#9DB0C6" stroke-width="3"/>
+    <line x1="797" y1="281" x2="912" y2="281" stroke="#9DB0C6" stroke-width="3"/>
+    <text x="456" y="291" text-anchor="middle" fill="#FFFFFF" font-size="28" font-weight="500" letter-spacing="10"
+          font-family="'Avenir Next','Century Gothic',Futura,'Poppins','Helvetica Neue',Arial,sans-serif">Genome-scale world models</text>
+  </g>
+
+  <text x="600" y="452" text-anchor="middle" fill="#FFFFFF" font-size="33" font-weight="600"
+        font-family="Inter,'Helvetica Neue',Arial,sans-serif">One model that reads, scores, and writes DNA at genome scale.</text>
+  <text x="600" y="510" text-anchor="middle" fill="#8FA3BC" font-size="21" font-weight="500" letter-spacing="1.5"
+        font-family="Inter,'Helvetica Neue',Arial,sans-serif">Shanghai Artificial Intelligence Laboratory &#183; Technical report</text>
+
+  <rect x="280" y="586" width="640" height="5" rx="2.5" fill="url(#og-rule)"/>
+</svg>

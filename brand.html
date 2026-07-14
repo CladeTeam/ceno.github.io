@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The CENO brand kit — logo lockups, icon mark, app tiles, banners, and the project palette, with vector downloads."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CENO" />
+    <meta property="og:title" content="CENO · Brand kit" />
+    <meta property="og:description" content="Logo lockups, icon mark, app tiles, banners, and the CENO palette." />
+    <meta property="og:image" content="assets/brand/ceno-og-card.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#0E1C2E" />
+    <title>CENO | Brand kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("ceno-theme");
+          var sysDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.setAttribute("data-theme", saved || (sysDark ? "dark" : "light"));
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <style>
+      .kit-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+      }
+
+      .kit-card {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--card);
+        box-shadow: var(--soft-shadow);
+      }
+
+      .kit-stage {
+        display: grid;
+        place-items: center;
+        min-height: 168px;
+        padding: 24px;
+        background: var(--wash);
+      }
+
+      .kit-stage.on-dark {
+        background: #0e1c2e;
+      }
+
+      .kit-stage.on-grid {
+        background-color: var(--wash);
+        background-image:
+          linear-gradient(45deg, var(--wash-2) 25%, transparent 25%),
+          linear-gradient(-45deg, var(--wash-2) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, var(--wash-2) 75%),
+          linear-gradient(-45deg, transparent 75%, var(--wash-2) 75%);
+        background-size: 16px 16px;
+        background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+      }
+
+      .kit-stage img {
+        display: block;
+        width: auto;
+        max-width: 100%;
+        max-height: 120px;
+      }
+
+      .kit-meta {
+        display: grid;
+        gap: 3px;
+        padding: 14px 16px;
+        border-top: 1px solid var(--line);
+      }
+
+      .kit-meta strong {
+        font-size: 0.92rem;
+      }
+
+      .kit-meta span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .kit-meta a {
+        justify-self: start;
+        margin-top: 4px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .swatch {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: var(--card);
+      }
+
+      .swatch i {
+        display: block;
+        height: 72px;
+      }
+
+      .swatch div {
+        display: grid;
+        gap: 2px;
+        padding: 12px 14px;
+      }
+
+      .swatch strong {
+        font-size: 0.88rem;
+      }
+
+      .swatch code {
+        color: var(--muted);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.78rem;
+      }
+
+      .swatch span {
+        color: var(--quiet);
+        font-size: 0.78rem;
+      }
+
+      .letter-notes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 16px;
+        margin-top: 22px;
+      }
+
+      .letter-notes article {
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--accent);
+        border-radius: var(--radius-sm);
+        background: var(--card);
+      }
+
+      .letter-notes strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 0.95rem;
+      }
+
+      .letter-notes p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .usage-list {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .usage-list code {
+        padding: 1px 5px;
+        border-radius: 5px;
+        background: var(--wash-2);
+        color: var(--ink-2);
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.82rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="CENO home">
+        <svg class="brand-mark" viewBox="-6 -6 922 212" role="img" aria-label="CENO">
+          <defs>
+            <linearGradient id="bm-ring" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#12A69A" />
+              <stop offset="0.5" stop-color="#2856E6" />
+              <stop offset="1" stop-color="#7C3BE8" />
+            </linearGradient>
+            <mask id="bm-ngap" maskUnits="userSpaceOnUse" x="-30" y="-30" width="240" height="260">
+              <rect x="-30" y="-30" width="240" height="260" fill="#fff" />
+              <circle cx="85" cy="100" r="23" fill="#000" />
+            </mask>
+          </defs>
+          <path d="M164.62 49.52 A82 82 0 1 0 164.62 150.48" fill="none" stroke="#2856E6" stroke-width="36"
+                stroke-dasharray="94.2 11 45 11 24 11 14 11 24 11 45 11 300" />
+          <g transform="translate(246,0)">
+            <rect x="0" y="0" width="170" height="36" rx="5" fill="#2856E6" />
+            <rect x="0" y="82" width="170" height="36" rx="5" fill="#12A69A" />
+            <rect x="0" y="164" width="170" height="36" rx="5" fill="#7C3BE8" />
+          </g>
+          <g transform="translate(462,0)">
+            <g mask="url(#bm-ngap)">
+              <path class="ceno-ink" d="M0 0 H36 V200 H0 Z M134 0 H170 V200 H134 Z" />
+              <path class="ceno-ink" d="M0 0 L42 0 L170 200 L128 200 Z" />
+            </g>
+            <circle cx="85" cy="100" r="15" fill="#12A69A" />
+          </g>
+          <g transform="translate(678,0)">
+            <path d="M178.83 77.40 A82 82 0 1 0 178.83 122.60" fill="none" stroke="url(#bm-ring)" stroke-width="36" />
+            <rect x="168" y="91" width="64" height="18" rx="9" fill="#F45F4D" />
+          </g>
+        </svg>
+        <small>Brand kit</small>
+      </a>
+      <nav id="siteNav" aria-label="Sections">
+        <a href="index.html">&larr; Project page</a>
+        <a href="#lockups">Lockups</a>
+        <a href="#marks">Icon &amp; tiles</a>
+        <a href="#banners">Banners</a>
+        <a href="#palette">Palette</a>
+        <a href="#usage">Usage</a>
+      </nav>
+      <div class="topbar-end">
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="band" id="lockups">
+        <div class="section-heading">
+          <p class="kicker">Brand kit</p>
+          <h2>CENO logo, marks, and palette</h2>
+          <p class="lede">
+            Every asset below is a self-contained SVG that scales losslessly and shares one letterform geometry.
+            The wordmark encodes the model itself: <em>context</em>, <em>sequence</em>, <em>long-range connection</em>,
+            and the <em>world loop</em> broken by an intervention.
+          </p>
+        </div>
+
+        <div class="kit-grid">
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-logo-full-color.svg" alt="CENO primary lockup, full color" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Primary lockup</strong>
+              <span>Full color, wordmark + tagline. The default on light surfaces.</span>
+              <a href="assets/brand/ceno-logo-full-color.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage on-dark">
+              <img src="assets/brand/ceno-logo-white.svg" alt="CENO lockup in white, for dark surfaces" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>White lockup</strong>
+              <span>Transparent background, for dark surfaces and photography.</span>
+              <a href="assets/brand/ceno-logo-white.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-wordmark.svg" alt="CENO wordmark without tagline" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Wordmark</strong>
+              <span>No tagline — for small sizes and UI headers. This is what the site header uses.</span>
+              <a href="assets/brand/ceno-wordmark.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-logo-monochrome.svg" alt="CENO lockup in navy monochrome" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Monochrome</strong>
+              <span>Navy, single ink. For print, fax-grade reproduction, and embossing.</span>
+              <a href="assets/brand/ceno-logo-monochrome.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band" id="marks">
+        <div class="section-heading">
+          <p class="kicker">Marks</p>
+          <h2>Icon mark and tiles</h2>
+          <p class="lede">
+            The <strong>O</strong> — the world loop, broken by the coral intervention dash — stands alone as the icon.
+            It is the favicon, the app icon, and the avatar.
+          </p>
+        </div>
+
+        <div class="kit-grid">
+          <figure class="kit-card">
+            <div class="kit-stage on-grid">
+              <img src="assets/brand/ceno-icon.svg" alt="CENO icon mark on a transparent background" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Icon mark</strong>
+              <span>Transparent. Gradient ring reads on light and dark alike.</span>
+              <a href="assets/brand/ceno-icon.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-icon-square-dark.svg" alt="CENO app icon, navy rounded square" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>App tile</strong>
+              <span>Rounded square. Ships as <code>favicon.svg</code> and <code>apple-touch-icon.png</code>.</span>
+              <a href="assets/brand/ceno-icon-square-dark.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-icon-circle-dark.svg" alt="CENO avatar, navy circle" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Avatar</strong>
+              <span>Circular tile — GitHub org, Hugging Face, and social profiles.</span>
+              <a href="assets/brand/ceno-icon-circle-dark.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage on-dark">
+              <img src="assets/brand/ceno-icon-circle-light.svg" alt="CENO avatar, light circle" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Avatar, light</strong>
+              <span>The inverse tile, for placement on dark or busy backgrounds.</span>
+              <a href="assets/brand/ceno-icon-circle-light.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band" id="banners">
+        <div class="section-heading">
+          <p class="kicker">Application</p>
+          <h2>Banners and the social card</h2>
+          <p class="lede">
+            The dark and light banners are the pair used in the GitHub READMEs — they swap automatically with the
+            reader's theme. The social card is what unfurls when the project page is shared.
+          </p>
+        </div>
+
+        <div class="kit-grid">
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-banner-gradient.svg" alt="CENO banner on a blue-to-purple gradient" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Gradient banner</strong>
+              <span>Blue &rarr; purple. For slide covers and headers.</span>
+              <a href="assets/brand/ceno-banner-gradient.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-banner-dark.svg" alt="CENO banner on navy" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Dark banner</strong>
+              <span>Navy. Serves the GitHub README in dark mode.</span>
+              <a href="assets/brand/ceno-banner-dark.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-banner-light.svg" alt="CENO banner on a light card" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Light banner</strong>
+              <span>Off-white card. Serves the GitHub README in light mode.</span>
+              <a href="assets/brand/ceno-banner-light.svg" download>Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <figure class="kit-card">
+            <div class="kit-stage">
+              <img src="assets/brand/ceno-og-card.png" alt="CENO social preview card, 1200 by 630" />
+            </div>
+            <figcaption class="kit-meta">
+              <strong>Social card</strong>
+              <span>1200 &times; 630. The <code>og:image</code> for the project page.</span>
+              <a href="assets/brand/ceno-og-card.png" download>Download PNG</a>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band" id="palette">
+        <div class="section-heading">
+          <p class="kicker">Palette</p>
+          <h2>Five colors, each with a job</h2>
+          <p class="lede">
+            The palette maps onto the model's three stages, plus the intervention that breaks the loop and the ink
+            that carries everything else. The O ring runs teal &rarr; blue &rarr; purple, in that order, from top to bottom.
+          </p>
+        </div>
+
+        <div class="swatches">
+          <div class="swatch">
+            <i style="background: #2856e6"></i>
+            <div><strong>Blue</strong><code>#2856E6</code><span>Context / core</span></div>
+          </div>
+          <div class="swatch">
+            <i style="background: #12a69a"></i>
+            <div><strong>Teal</strong><code>#12A69A</code><span>Evolution</span></div>
+          </div>
+          <div class="swatch">
+            <i style="background: #7c3be8"></i>
+            <div><strong>Purple</strong><code>#7C3BE8</code><span>Design</span></div>
+          </div>
+          <div class="swatch">
+            <i style="background: #f45f4d"></i>
+            <div><strong>Coral</strong><code>#F45F4D</code><span>Mutation / intervention</span></div>
+          </div>
+          <div class="swatch">
+            <i style="background: #0e1c2e"></i>
+            <div><strong>Navy</strong><code>#0E1C2E</code><span>Ink / dark surfaces</span></div>
+          </div>
+        </div>
+
+        <div class="letter-notes">
+          <article>
+            <strong>C — Context</strong>
+            <p>A segmented ring; the dashes shrink toward mid-left, like context resolving into focus.</p>
+          </article>
+          <article>
+            <strong>E — Sequence tracks</strong>
+            <p>Three parallel bars in blue, teal, and purple — the three stages, read in order.</p>
+          </article>
+          <article>
+            <strong>N — Long-range connection</strong>
+            <p>A diagonal with a teal node. The gap around the node is a true mask cut-out, so it holds on any background.</p>
+          </article>
+          <article>
+            <strong>O — World loop</strong>
+            <p>An open gradient ring, broken by the coral intervention dash. This letter alone is the icon.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="band" id="usage">
+        <div class="section-heading">
+          <p class="kicker">Usage</p>
+          <h2>A few rules</h2>
+        </div>
+        <ul class="usage-list">
+          <li>On dark surfaces use the <strong>white lockup</strong>, or swap only the navy <strong>N</strong> to light ink —
+            that is what this site does, via the <code>--brand-ink</code> custom property.</li>
+          <li>Keep clear space around the lockup equal to the height of the <strong>E</strong> bars.</li>
+          <li>Never re-color the coral dash, and never close the <strong>O</strong> ring — the break carries the meaning.</li>
+          <li>Don't stretch: the geometry is built on a 200-unit cap height and a 36-unit stroke.</li>
+          <li>The tagline uses a geometric sans stack. For print delivery, convert it to outlines in a vector editor.</li>
+          <li>Masters, PNG, and print-ready PDF exports all live in <code>CENO_logo_vector/</code>; regenerate them with
+            <code>python3 generate_logos.py</code>.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">
+        <img src="assets/brand/ceno-icon.svg" alt="" width="40" height="35" loading="lazy" />
+        <span>
+          <strong>CENO</strong>
+          <small>Genome-scale world models</small>
+        </span>
+      </div>
+      <span><a href="index.html">Back to the project page</a></span>
+    </footer>
+
+    <script>
+      (function () {
+        var toggle = document.querySelector(".theme-toggle");
+        if (!toggle) return;
+        toggle.addEventListener("click", function () {
+          var root = document.documentElement;
+          var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          try {
+            localStorage.setItem("ceno-theme", next);
+          } catch (e) {
+            /* storage unavailable — theme still applies for this page view */
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

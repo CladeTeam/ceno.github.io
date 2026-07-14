@@ -1,5 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="18" fill="#ffffff"/>
-  <rect x="9" y="9" width="110" height="110" rx="14" fill="none" stroke="#0069aa" stroke-width="8"/>
-  <text x="64" y="76" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#111519">CENO</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <defs>
+    <linearGradient id="fav-ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#12A69A"/>
+      <stop offset="0.5" stop-color="#2856E6"/>
+      <stop offset="1" stop-color="#7C3BE8"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="240" height="240" rx="54" fill="#0E1C2E"/>
+  <g transform="translate(10,32) scale(0.88)">
+    <path d="M178.83 77.40 A82 82 0 1 0 178.83 122.60" fill="none" stroke="url(#fav-ring)" stroke-width="36"/>
+    <rect x="168" y="91" width="64" height="18" rx="9" fill="#F45F4D"/>
+  </g>
 </svg>

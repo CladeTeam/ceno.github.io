@@ -20,6 +20,9 @@
   --accent: var(--blue);
   --vep-path: #d84545;
 
+  /* Brand ink — the navy of the CENO "N"; flips to light on dark surfaces. */
+  --brand-ink: #0e1c2e;
+
   --radius: 14px;
   --radius-sm: 9px;
   --shadow: 0 18px 50px rgba(15, 22, 32, 0.12);
@@ -120,21 +123,22 @@ p {
   text-decoration: none;
 }
 
-.brand span {
-  display: grid;
-  width: 64px;
-  height: 34px;
-  place-items: center;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 0.98rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  background: linear-gradient(120deg, var(--blue), var(--purple));
+.brand-mark {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 27px;
+}
+
+/* Ink-colored letterforms (the "N") follow the active theme. */
+.ceno-ink {
+  fill: var(--brand-ink);
 }
 
 .brand small {
-  color: #56656f;
+  padding-left: 12px;
+  border-left: 1px solid var(--line-strong);
+  color: var(--muted);
   font-size: 0.82rem;
   font-weight: 700;
   white-space: nowrap;
@@ -916,6 +920,7 @@ button:focus-visible {
 /* ---------- Footer ---------- */
 footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 18px;
   width: min(var(--maxw), calc(100% - 48px));
@@ -929,6 +934,35 @@ footer {
 footer a {
   color: var(--accent);
   text-decoration: none;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand img {
+  flex: none;
+  width: 40px;
+  height: 35px;
+}
+
+.footer-brand span {
+  display: grid;
+  gap: 2px;
+}
+
+.footer-brand strong {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.footer-brand small {
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 /* ---------- Responsive ---------- */
@@ -1254,6 +1288,9 @@ footer a {
 
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
   --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* The navy "N" would vanish on a dark surface — carry it in light ink instead. */
+  --brand-ink: #eaf1f8;
 }
 
 [data-theme="dark"] .topbar {
@@ -2102,3 +2139,44 @@ footer a {
 }
 
 
+
+/* ---------- Demo video section ---------- */
+.video-frame {
+  margin: 0 auto;
+  max-width: 960px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-frame figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.video-download {
+  color: var(--blue);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.video-download:hover {
+  text-decoration: underline;
+}

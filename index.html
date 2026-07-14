@@ -16,13 +16,20 @@
       property="og:description"
       content="One model that reads, scores, and writes DNA at genome scale: long-context understanding, variant-effect prediction, and programmable regulatory design."
     />
-    <meta property="og:image" content="assets/figures/ceno-figure-1-display.png" />
+    <meta property="og:image" content="assets/brand/ceno-og-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CENO — genome-scale world models" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="assets/brand/ceno-og-card.png" />
     <meta name="citation_title" content="CENO: A Genome-Scale World Model for Evolutionary Sequence Interpretation and Programmable Regulatory Design" />
     <meta name="citation_author" content="CENO Team" />
     <meta name="citation_publication_date" content="2026" />
     <meta name="citation_pdf_url" content="assets/paper/CENO_Technical_Report_Version.pdf" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta name="theme-color" content="#0E1C2E" />
     <title>CENO | Genome-scale world model</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,10 +53,45 @@
   <body>
     <header class="topbar">
       <a class="brand" href="#home" aria-label="CENO home">
-        <span>CENO</span>
+        <svg class="brand-mark" viewBox="-6 -6 922 212" role="img" aria-label="CENO">
+          <defs>
+            <linearGradient id="bm-ring" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#12A69A" />
+              <stop offset="0.5" stop-color="#2856E6" />
+              <stop offset="1" stop-color="#7C3BE8" />
+            </linearGradient>
+            <mask id="bm-ngap" maskUnits="userSpaceOnUse" x="-30" y="-30" width="240" height="260">
+              <rect x="-30" y="-30" width="240" height="260" fill="#fff" />
+              <circle cx="85" cy="100" r="23" fill="#000" />
+            </mask>
+          </defs>
+          <!-- C · context: segmented ring -->
+          <path d="M164.62 49.52 A82 82 0 1 0 164.62 150.48" fill="none" stroke="#2856E6" stroke-width="36"
+                stroke-dasharray="94.2 11 45 11 24 11 14 11 24 11 45 11 300" />
+          <!-- E · sequence tracks -->
+          <g transform="translate(246,0)">
+            <rect x="0" y="0" width="170" height="36" rx="5" fill="#2856E6" />
+            <rect x="0" y="82" width="170" height="36" rx="5" fill="#12A69A" />
+            <rect x="0" y="164" width="170" height="36" rx="5" fill="#7C3BE8" />
+          </g>
+          <!-- N · long-range connection (ink follows the theme) -->
+          <g transform="translate(462,0)">
+            <g mask="url(#bm-ngap)">
+              <path class="ceno-ink" d="M0 0 H36 V200 H0 Z M134 0 H170 V200 H134 Z" />
+              <path class="ceno-ink" d="M0 0 L42 0 L170 200 L128 200 Z" />
+            </g>
+            <circle cx="85" cy="100" r="15" fill="#12A69A" />
+          </g>
+          <!-- O · world loop, broken by the coral intervention dash -->
+          <g transform="translate(678,0)">
+            <path d="M178.83 77.40 A82 82 0 1 0 178.83 122.60" fill="none" stroke="url(#bm-ring)" stroke-width="36" />
+            <rect x="168" y="91" width="64" height="18" rx="9" fill="#F45F4D" />
+          </g>
+        </svg>
         <small>Genome World Model</small>
       </a>
       <nav id="siteNav" aria-label="Project sections">
+        <a href="#video">Watch</a>
         <a href="#pipeline">Approach</a>
         <a href="#understand">Understand</a>
         <a href="#evolve">Evolve</a>
@@ -143,6 +185,36 @@
             <strong>One backbone: pre-train &rarr; post-train &rarr; reinforcement learning. Click for the full system figure.</strong>
           </div>
         </aside>
+      </section>
+
+      <!-- VIDEO: 2-minute overview -->
+      <section class="band" id="video">
+        <div class="section-heading">
+          <p class="kicker">2-minute overview</p>
+          <h2>Watch the CENO overview</h2>
+          <p class="lede">
+            A two-minute tour of the whole story &mdash; long-context understanding, evolution-aware variant
+            scoring, and regulatory sequence design &mdash; with bilingual captions.
+          </p>
+        </div>
+        <figure class="video-frame">
+          <video
+            controls
+            preload="none"
+            playsinline
+            poster="assets/video/ceno-poster.jpg"
+            width="1920"
+            height="1080"
+            aria-label="CENO two-minute overview video with bilingual (Chinese and English) captions"
+          >
+            <source src="assets/video/ceno-demo.mp4" type="video/mp4" />
+            <p>Your browser can&rsquo;t play embedded video. <a href="assets/video/ceno-demo.mp4">Download the MP4</a>.</p>
+          </video>
+          <figcaption>
+            <span lang="zh-CN">CENO 两分钟概览（中英字幕）</span>
+            <a class="video-download" href="assets/video/ceno-demo.mp4" download>Download MP4</a>
+          </figcaption>
+        </figure>
       </section>
 
       <!-- APPROACH: the 3-act spine -->
@@ -528,8 +600,17 @@
     </div>
 
     <footer>
-      <span>CENO Genome World Model</span>
-      <span>For correspondence: <a href="mailto:renyuchen@pjlab.org.cn">renyuchen@pjlab.org.cn</a></span>
+      <div class="footer-brand">
+        <img src="assets/brand/ceno-icon.svg" alt="" width="40" height="35" loading="lazy" />
+        <span>
+          <strong>CENO</strong>
+          <small>Genome-scale world models</small>
+        </span>
+      </div>
+      <span>
+        <a href="brand.html">Brand kit</a> &middot; For correspondence:
+        <a href="mailto:renyuchen@pjlab.org.cn">renyuchen@pjlab.org.cn</a>
+      </span>
     </footer>
 
     <script src="app.js"></script>
